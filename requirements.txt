@@ -1,4 +1,14 @@
-pandas
+ipykernel
 numpy
+pandas
+matplotlib
 seaborn
--e .
+bs4
+flask
+scikit-learn
+memory_profiler
+streamlit
+xgboost
+catboost
+dill
+#-e .

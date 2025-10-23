@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from src.logger import logging
 from src.exception import customException
 
-
+from src.component.data_transformation import DataTransformation,DataTransformationConfig
 @dataclass
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts', "train.csv")
@@ -22,7 +22,8 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method/component")
         try:
-            df = pd.read_csv(r'Notebook/data/stud.csv')
+            df = pd.read_csv(r'E:\ML Projects\Notebook\data\stud.csv')
+
             logging.info("Read the dataset as DataFrame")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
@@ -42,6 +43,13 @@ class DataIngestion:
                 self.ingestion_config.test_data_path,
             )
         except Exception as e:
-            raise CustomException(e, sys)
+            raise customException(e, sys)
+        
 
+if __name__ == "__main__":
+    obj = DataIngestion()
+    train_data,test_data = obj.initiate_data_ingestion()
+    
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_trans(train_data,test_data)
 
